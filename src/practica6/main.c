@@ -1,6 +1,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#include <stdarg.h>
 #include <time.h>
 #include "../captura/captura.h"
 #include "../Estructuras/arbol/arbol.h"
@@ -8,6 +11,8 @@
 int* crearEntero(int);
 int compararEntero(void*,void*);
 void imprimirEntero(void*);
+
+void myprintf(char *msg,char *formato,...);
 
 int main(void)
 {
@@ -33,6 +38,10 @@ int main(void)
 	printf("\n POSTORDEN: ");
 	imprimirOrden(arbol,POSTORDEN);
 	
+	printf("\n");
+	myprintf("Hola","dcfx",1,'A',2.5,&arbol);
+	
+	
 	printf("\n\n FIN DE PROGRAMA\n");
 	return 0;
 }
@@ -57,4 +66,33 @@ void imprimirEntero(void *a)
 {
 	int *aa=a;
 	printf("%d",*aa);
+}
+
+
+void myprintf(char* msg,char *formato,...)
+{
+	va_list args;
+    va_start(args, formato);
+	printf("\n %s ",msg);
+	char *ptr = formato;
+	while(*ptr!='\0')
+	{
+		switch(*ptr)
+		{
+			case 'd':
+				printf("%d ",va_arg(args, int));
+				break;
+			case 'c':
+				printf("%c ",va_arg(args, int));				
+				break;
+			case 'f':
+				printf("%f ",va_arg(args, double));				
+				break;
+			case 'x':
+				printf("%x ",va_arg(args, Arbol*));				
+				break;
+		}
+		ptr++;
+	}
+	va_end(args);
 }
