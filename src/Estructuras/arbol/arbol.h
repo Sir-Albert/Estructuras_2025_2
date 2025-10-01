@@ -8,6 +8,17 @@
 #define ORDEN 2
 #define POSTORDEN 3
 #define INVERSO 4
+#define IZQUIERDA 0
+#define DERECHA 1
+
+typedef struct
+{
+	NodoA *padre;
+	NodoA *nodo;
+	void *dato;
+	int rama;
+}Resultado;
+
 typedef struct
 {
 	NodoA *raiz;
@@ -18,7 +29,17 @@ typedef struct
 }Arbol;
 
 
+void eliminarArbol(Arbol *arbol);
+
+Resultado buscarEnArbol(Arbol arbol,void *dato);
+
+void eliminarDatoArbol(Arbol *arbol, void *dato);
+
+
 void insertarArbol(Arbol *arbol,void *dato);
 void imprimirArbol(Arbol arbol);
 void imprimirOrden(Arbol arbol,int opcion);
+
+int altura(Arbol arbol);
+void equilibrar(Arbol *arbol);
 #endif

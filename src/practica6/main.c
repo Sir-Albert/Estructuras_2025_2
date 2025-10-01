@@ -21,27 +21,35 @@ int main(void)
 	arbol.cantidad = 0;
 	arbol.imprimir = &imprimirEntero;
 	arbol.comparar = &compararEntero;
-	insertarArbol(&arbol, crearEntero(4));
-	insertarArbol(&arbol, crearEntero(2));
-	insertarArbol(&arbol, crearEntero(6));
-	insertarArbol(&arbol, crearEntero(3));
+	arbol.liberar = &free;
+	
+	insertarArbol(&arbol, crearEntero(9));
+	insertarArbol(&arbol, crearEntero(8));
+	insertarArbol(&arbol, crearEntero(11));
 	insertarArbol(&arbol, crearEntero(7));
+	insertarArbol(&arbol, crearEntero(6));
 	insertarArbol(&arbol, crearEntero(5));
-	imprimirArbol(arbol);
-	
-	printf("\n PREORDEN: ");
-	imprimirOrden(arbol,PREORDEN);
-	printf("\n ORDEN: ");
-	imprimirOrden(arbol,ORDEN);
-	printf("\n INVERSO: ");
-	imprimirOrden(arbol,INVERSO);
-	printf("\n POSTORDEN: ");
-	imprimirOrden(arbol,POSTORDEN);
-	
+	insertarArbol(&arbol, crearEntero(10));
+	insertarArbol(&arbol, crearEntero(12));
+	/* 
+	insertarArbol(&arbol, crearEntero(5));
+	insertarArbol(&arbol, crearEntero(5));
+	insertarArbol(&arbol, crearEntero(5));
+	insertarArbol(&arbol, crearEntero(5));
+	insertarArbol(&arbol, crearEntero(4));
+	insertarArbol(&arbol, crearEntero(4));
+	 */
 	printf("\n");
-	myprintf("Hola","dcfx",1,'A',2.5,&arbol);
+	imprimirArbol(arbol);	
+	printf("\n Altura %d ", altura(arbol));
+	equilibrar(&arbol);	
+	printf("\n");
+	imprimirArbol(arbol);	
+	printf("\n Altura %d ", altura(arbol));
+
+	//myprintf("Hola","dcfx",1);
 	
-	
+	eliminarArbol(&arbol);
 	printf("\n\n FIN DE PROGRAMA\n");
 	return 0;
 }
