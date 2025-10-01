@@ -379,9 +379,9 @@ void ordenarRaices(void **inicio,void **fin,void **ordenado,int *indice)
 	mitad = (fin - inicio + 1)/2;
 	ordenado[*indice] = *(inicio+mitad);
 	(*indice)++;
-	//IZQUIERDA	
+	//MITAD IZQUIERDA	
 	ordenarRaices(inicio,inicio+mitad-1,ordenado,indice);
-	//DERECHA
+	//MITAD DERECHA
 	ordenarRaices(inicio+mitad+1,fin,ordenado,indice);
 }
 
@@ -403,9 +403,7 @@ void equilibrar(Arbol *arbol)
 	//PRIORIZANDO LAS RAICES
 	ordenarRaices(datos,datos+(cantidad-1),ordenados,&indice); 
 	for( int i=0; i<cantidad ; i++)
-	{
 		insertarArbol(arbol, ordenados[i]  ); //RECONSTRUIR ARBOL
-	}
 	free(datos);
 	free(ordenados);
 }
