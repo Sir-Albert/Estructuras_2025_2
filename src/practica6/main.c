@@ -31,14 +31,16 @@ int main(void)
 	insertarArbol(&arbol, crearEntero(5));
 	insertarArbol(&arbol, crearEntero(10));
 	insertarArbol(&arbol, crearEntero(12));
-	/* 
+	
+	insertarArbol(&arbol, crearEntero(5));
+	insertarArbol(&arbol, crearEntero(5));
 	insertarArbol(&arbol, crearEntero(5));
 	insertarArbol(&arbol, crearEntero(5));
 	insertarArbol(&arbol, crearEntero(5));
 	insertarArbol(&arbol, crearEntero(5));
 	insertarArbol(&arbol, crearEntero(4));
 	insertarArbol(&arbol, crearEntero(4));
-	 */
+	
 	printf("\n");
 	imprimirArbol(arbol);	
 	printf("\n Altura %d ", altura(arbol));
