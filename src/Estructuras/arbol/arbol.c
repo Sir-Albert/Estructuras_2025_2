@@ -327,58 +327,15 @@ void extraccionDatos(NodoA *raiz,void **datos,int *indice)
 	
 }
 
-/*
-void ordenarRaices(void **inicio,void **fin,void **ordenado,int *indice)
-{
-	int mitad=0;	
-	mitad = (fin - inicio + 1)/2;
-	if(inicio == fin)
-	{		
-		printf("\n RETORON");
-		printf("\n I:%x M:%x F:%x",inicio,inicio+mitad,fin);
-		printf("\n %d %x -- %d",mitad,inicio+mitad,*indice);
-		ordenado[*indice] = *(inicio);
-		(*indice)++;
-		return;
-	}	
-	if( (inicio+mitad)>fin)
-		return;
-	ordenado[*indice] = *(inicio+mitad);
-	(*indice)++;
-		
-	printf("\n I:%x M:%x F:%x",inicio,inicio+mitad,fin);
-	printf("\n %d %x -- %d",mitad,inicio+mitad,*indice);
-	getchar();
-	//IZQUIERDA	
-	if( (inicio+mitad-1) >= inicio)
-	{
-		printf("\n IZQUIERDA");
-		ordenarRaices(inicio,inicio+mitad-1,ordenado,indice);
-	}
-	//DERECHA
-	if( (inicio+mitad+1) <= fin )
-	{
-		printf("\n DERECHA");
-		ordenarRaices(inicio+mitad+1,fin,ordenado,indice);
-	}
-} 
-*/
-
 
 void ordenarRaices(void **inicio,void **fin,void **ordenado,int *indice)
 {
 	int mitad=0;
-	if(inicio > fin)
-		return;
-	if(inicio == fin)
-	{		
-		ordenado[*indice] = *(inicio);
-		(*indice)++;
-		return;
-	}	
+	if(inicio > fin)return;
 	mitad = (fin - inicio + 1)/2;
 	ordenado[*indice] = *(inicio+mitad);
-	(*indice)++;
+	(*indice)++;	
+	if(inicio == fin)return;
 	//MITAD IZQUIERDA	
 	ordenarRaices(inicio,inicio+mitad-1,ordenado,indice);
 	//MITAD DERECHA
