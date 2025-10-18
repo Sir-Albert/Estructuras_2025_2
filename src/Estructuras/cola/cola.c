@@ -93,5 +93,15 @@ void eliminarCola(Cola *cola)
 
 void* buscarC(Cola cola,void *dato,int (*comparar)(void*,void*))
 {
-	return NULL;
+	void *encontrado = NULL;
+	int i;
+	for( i = 0; i< cola.cantidad;i++)
+	{
+		if( comparar(dato,peekC(cola))==0 )
+		{
+			encontrado = peekC(cola);
+		}
+		enqueue_Nodo(&cola,dequeue_Nodo(&cola));
+	}
+	return encontrado;
 }

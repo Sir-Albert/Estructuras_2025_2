@@ -189,8 +189,9 @@ Pila solucion(unsigned char **lab)
 		posibles = alternativas(lab,coordenada);
 		printf("\n");
 		imprimirCoordenada(coordenada);
+		getchar();
 		//imprimirPosibles(posibles);
-		//imprimirLab(lab);		
+		imprimirLab(lab);		
 		if(posibles&DERECHA)
 		{			
 			coordenada = crearCoordenada(coordenada->x,coordenada->y+1);
