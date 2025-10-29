@@ -17,7 +17,8 @@ int main(void)
 	// {INICIO NULO, SIN LIMITE, CANTIDAD 0, COMO IMPRIMIR, COMO LIBERAR}
 	Pila pila = {NULL,-1,0,&imprimirCadena,&liberarCadena};
 	//Pila pilaC = {NULL,-1,0,&imprimirCaracter,NULL};
-	push(&pila, cadenaDinamica("David") );
+	while(1)
+		push(&pila, cadenaDinamica("David") );
 	push(&pila, cadenaDinamica("Carlo") );
 	push(&pila, cadenaDinamica("J") );
 	push(&pila, cadenaDinamica("Nicol") );
