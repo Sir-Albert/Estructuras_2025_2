@@ -1,5 +1,23 @@
 #include "arbol.h"
 
+void invertirRamas(NodoA *raiz)
+{
+    if(!raiz)
+        return;
+    invertirRamas(raiz->izq);
+    invertirRamas(raiz->dch);
+    NodoA *aux;
+    aux = raiz->izq;
+    raiz->izq = raiz->dch;
+    raiz->dch = aux;
+}
+
+void invertirArbol(Arbol *arbol)
+{
+    invertirRamas(arbol->raiz);
+}
+
+
 void insertarArbolOrdenado(NodoA *raiz,void *dato,int (*comparar)(void*,void*))
 {
 	if(comparar(dato,raiz->dato)<=0)
@@ -24,7 +42,6 @@ void insertarArbolOrdenado(NodoA *raiz,void *dato,int (*comparar)(void*,void*))
 
 
 
-
 void insertarArbol(Arbol *arbol,void *dato)
 {
 	if(!arbol->raiz)
@@ -33,6 +50,53 @@ void insertarArbol(Arbol *arbol,void *dato)
 		insertarArbolOrdenado(arbol->raiz,dato,arbol->comparar);
 	arbol->cantidad++;
 }
+
+/*
+void imprimir_arbol(NodoA* nodo, int nivel)
+{
+    int i;
+    if (nodo != NULL)
+        {
+        printf(" ");
+		printf("%d",nodo->dato);
+        if(nodo->dch)
+        {
+            printf("\n");
+            for (i = 0; i < nivel+1; i++)
+            {
+                if(i==nivel)
+                    printf(" |____R ");
+                else
+                    printf(" |      ");
+            }
+            imprimir_arbol(nodo->dch, nivel + 1);
+        }
+        if(nodo->izq)
+        {
+            printf("\n");
+            for (i = 0; i < nivel+1; i++)
+            {
+                printf(" |      ");
+                //printf(" |      ");
+            }
+            printf("\n");
+            for (i = 0; i < nivel+1; i++)
+            {
+                if(i==nivel)
+                    printf(" |____L ");
+                else
+                    printf(" |      ");
+            }
+            imprimir_arbol(nodo->izq, nivel + 1);
+        }
+    }
+}
+
+void imprimirArbol(Arbol arbol)
+{
+	imprimir_arbol(arbol.raiz,0);
+}
+*/
 
 
 
