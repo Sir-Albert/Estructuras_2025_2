@@ -21,6 +21,7 @@ int main(void)
 	{
 		insertarHeap(&heap,&arr[i]);
 	}
+	
 	//CAMBIAR A HEAP MINIMO
 	heap.tipo = MIN;
 	heapify(&heap);
@@ -49,6 +50,13 @@ int main(void)
 	
 	return 0;
 }
+
+void cambiarPrioridad(Heap *heap)
+{	
+	heap->tipo = (heap->tipo == MIN) ? MAX:MIN;
+	heapify(heap);
+}
+
 
 
 void imprimirEntero(void *a)
