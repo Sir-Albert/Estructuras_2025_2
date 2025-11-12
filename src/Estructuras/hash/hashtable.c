@@ -94,5 +94,7 @@ void imprimirHashTabla(HashTable *hashtable)
 			if( cont == hashtable->cant)
 				break;
 		}
+		else
+			printf("\n [%d] = ",i);
 	}		
 }

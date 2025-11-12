@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <stdarg.h> //ELIPSIS
 #include "../nodos/nodo.h"
 #include "../cola/cola.h"
 
