@@ -13,12 +13,12 @@ typedef struct
 	int tam;
 	int cant;
 	int (*folding)(void*);
-	int (*hash)(int,int);
-	int (*rehash)(int,int,int);
 	void (*imprimir)(void*);
 	int (*comparar)(void*,void*);
 }HashTable;
 
+int hash(int clave,int tam);
+int rehash(int indice,int k,int tam);
 HashTable inicializarHashTable(int tam,void (*imprimir)(void*),int (*comparar)(void*,void*));
 int insertarClave(HashTable *hashtable,void *dato);
 Cola buscarClave(HashTable *hashtable,void *dato);

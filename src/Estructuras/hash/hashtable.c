@@ -1,5 +1,16 @@
 #include "hashtable.h"
 
+
+int hash(int clave,int tam)
+{
+	return clave % tam;
+}
+
+int rehash(int indice,int k,int tam)
+{
+	return (indice+k*k)%tam;
+}
+
 int validarHashTable(HashTable *hashtable)
 {
 	if(!hashtable->tabla)
@@ -7,7 +18,7 @@ int validarHashTable(HashTable *hashtable)
 		printf("\n No se ha reservado espacio");
 		return 0;
 	}
-	if(!hashtable->folding || !hashtable->hash || !hashtable->rehash)
+	if(!hashtable->folding )
 	{
 		printf("\n No se ha asignado alguna de estas funciones: folding,hash,rehash");
 		return 0;		
@@ -23,7 +34,7 @@ int validarHashTable(HashTable *hashtable)
 
 HashTable inicializarHashTable(int tam,void (*imprimir)(void*),int (*comparar)(void*,void*))
 {
-	HashTable hashtable = (HashTable) {NULL,tam,0,NULL,NULL,NULL,imprimir,comparar};
+	HashTable hashtable = (HashTable) {NULL,tam,0,NULL,imprimir,comparar};
 	while(!hashtable.tabla)
 		hashtable.tabla = (void**) calloc(tam,sizeof(void*));
 	return hashtable;	
@@ -35,7 +46,7 @@ int insertarClave(HashTable* hashtable,void *dato)
 		return 0;
 	int clave,indice,nuevo_indice,k;
 	clave = hashtable->folding(dato);
-	indice = hashtable->hash(clave,hashtable->tam);
+	indice = hash(clave,hashtable->tam);
 	if(hashtable->tabla[indice] == NULL)
 		hashtable->tabla[indice] = dato;
 	else
@@ -44,7 +55,7 @@ int insertarClave(HashTable* hashtable,void *dato)
 		do
 		{
 			k++;
-			nuevo_indice = hashtable->rehash(indice,k,hashtable->tam);
+			nuevo_indice = rehash(indice,k,hashtable->tam);
 		}while( hashtable->tabla[nuevo_indice] != NULL);		
 		hashtable->tabla[nuevo_indice] = dato;
 	}
@@ -59,7 +70,7 @@ Cola buscarClave(HashTable* hashtable,void *dato)
 		return cola;	
 	int clave,indice,nuevo_indice,k;
 	clave = hashtable->folding(dato);
-	indice = hashtable->hash(clave,hashtable->tam);
+	indice = hash(clave,hashtable->tam);
 	if(hashtable->tabla[indice] == NULL)
 		return cola;
 	else
@@ -67,7 +78,7 @@ Cola buscarClave(HashTable* hashtable,void *dato)
 		k = 0;
 		do
 		{
-			nuevo_indice = hashtable->rehash(indice,k,hashtable->tam);
+			nuevo_indice = rehash(indice,k,hashtable->tam);
 			if(hashtable->tabla[nuevo_indice]!=NULL)
 			{
 				if(hashtable->comparar(hashtable->tabla[nuevo_indice],dato)==0)

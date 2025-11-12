@@ -18,8 +18,6 @@ typedef struct
 Alumno* obtenerDatos(void);
 
 int folding(void* dato);
-int hash(int clave,int tam);
-int rehash(int indice,int k,int tam);
 void imprimir(void* dato);
 int comparar(void* datoA,void *datoB);
 
@@ -28,8 +26,6 @@ int main(void)
 	Cola cola;
 	HashTable hashtable = inicializarHashTable(300,&imprimir,&comparar);
 	hashtable.folding = &folding;
-	hashtable.hash = &hash;
-	hashtable.rehash = &rehash;
 	
 	Alumno *alumnos = obtenerDatos();
 	int i,insertados = 0;
@@ -73,15 +69,6 @@ int folding(void* dato)
 	return clave;
 }
 
-int hash(int clave,int tam)
-{
-	return clave % tam;
-}
-
-int rehash(int indice,int k,int tam)
-{
-	return (indice+k*k)%tam;
-}
 
 void imprimir(void* dato)
 {
