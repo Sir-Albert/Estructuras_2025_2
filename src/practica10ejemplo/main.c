@@ -17,6 +17,9 @@ typedef struct
 
 Alumno* obtenerDatos(void);
 
+
+char minuscula(char caracter);
+int compararCadenasIC(char *cadA,char *cadB);
 int folding(void* dato);
 void imprimir(void* dato);
 int comparar(void* datoA,void *datoB);
@@ -35,12 +38,22 @@ int main(void)
 	}
 	printf("\n Insertardos: %d", insertados);
 	
+	
 	imprimirHashTabla(&hashtable);
-	Alumno alumno = {0,"Ramon",""};
+	Alumno alumno = (Alumno){0,"Ramon",""};	
+	printf("\n Resultado Folding: %d ",folding(&alumno));
 	printf("\n BUSCAR Ramon ");	
 	cola = buscarClave(&hashtable,&alumno);
 	cola.imprimir = &imprimir;
-	printf("\n RESULTADO: ");	
+	printf("\n RESULTADO %d: ",cola.cantidad);
+	imprimirCola(cola);
+	
+	Alumno alumno2 = (Alumno){0,"rAmoN",""};	
+	printf("\n Resultado Folding: %d ",folding(&alumno2));
+	printf("\n BUSCAR rAmoN ");	
+	cola = buscarClave(&hashtable,&alumno2);
+	cola.imprimir = &imprimir;
+	printf("\n RESULTADO %d: ",cola.cantidad);	
 	imprimirCola(cola);
 	
 	printf("\n\n FIN DE PROGRAMA \n");
@@ -63,7 +76,7 @@ int folding(void* dato)
 			segmento = 0;
 			n++;
 		}
-		segmento+= cadena[i];
+		segmento+=minuscula(cadena[i]);
 	}
 	clave+= segmento*n;
 	return clave;
@@ -77,11 +90,41 @@ void imprimir(void* dato)
 	return;
 }
 
+char minuscula(char caracter)
+{
+	if( caracter>='A' && caracter<='Z')
+		return caracter+32;
+	return caracter;
+}
+
+int compararCadenasIC(char *cadA,char *cadB)
+{
+	int i;
+	char a,b;	
+	for( i = 0; cadA[i]!='\0' && cadB[i]!='\0';i++)
+	{
+		a = minuscula(cadA[i]);
+		b = minuscula(cadB[i]);
+		if( a == b)
+			continue;
+		else if( a < b)
+			return -1;
+		else
+			return 1;
+	}
+	if(cadA[i]==cadB[i])
+		return 0;
+	else if(cadA[i]=='\0')
+		return -1;
+	else
+		return 1;
+}
+
 int comparar(void* datoA,void *datoB)
 {	
 	Alumno *a=datoA;
 	Alumno *b=datoB;
-	return strcmp(a->nombre,b->nombre);
+	return compararCadenasIC(a->nombre,b->nombre);
 }
 
 Alumno* obtenerDatos(void)
